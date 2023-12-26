@@ -8,16 +8,16 @@ type AllType = {
   name: string;
   position: number;
   color: string;
-  weight: number
+  weight: number;
+};
+function compare<T extends keyof AllType>(top: Pick<AllType, T>, bottom: Pick<AllType, T>): Pick<AllType, T> {
+  const result = {} as Pick<AllType, T>;
+  Object.keys(top).forEach(key => {
+    result[key as keyof AllType] = top[key as keyof AllType];
+  });
+  Object.keys(bottom).forEach(key => {
+    result[key as keyof AllType] = bottom[key as keyof AllType];
+  });
+  return result;
 }
-
-function compare (top, bottom): AllType {
-  return {
-    name: top.name,
-    color: top.color,
-    position: bottom.position,
-    weight: bottom.weight,
-  }
-}
-
 export {};
